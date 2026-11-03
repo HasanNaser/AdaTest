@@ -48,6 +48,39 @@ dialog{border:1px solid #b3a0f22b;background:#1d1a26;color:var(--text);border-ra
 @media(max-width:700px){.focus-dock>button{min-width:37px}.focus-dock #focus-sound{min-width:30px}}
 
 .focus-mode #workspace>.control-panel{scrollbar-width:thin;scrollbar-color:#655078 transparent}.focus-mode #workspace>.control-panel::-webkit-scrollbar{width:4px}.focus-mode #workspace>.control-panel::-webkit-scrollbar-thumb{background:#655078;border-radius:8px}.focus-mode #workspace>.control-panel::-webkit-scrollbar-track{background:transparent}.focus-dock>button{font-size:9px}
+
+/* A real, keyboard accessible hit target follows the physical chest switch. */
+.robot-power{position:absolute;z-index:3;width:44px;height:44px;border-radius:50%;transform:translate(-50%,-50%);padding:0;touch-action:manipulation;background:transparent;border:1px solid transparent}
+.robot-power:hover,.robot-power:focus-visible{border-color:#b3a0f288;background:#b3a0f212;box-shadow:0 0 20px #b3a0f244;filter:none}.robot-power:active{transform:translate(-50%,-50%) scale(.92)}
+.power-control{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--purple);padding:8px;border-radius:8px}.power-control[aria-pressed=false]{color:var(--muted)}
+#sleep-status{position:absolute;z-index:2;top:72px;left:50%;transform:translateX(-50%);text-align:center;pointer-events:none;color:#c4b6d9;font-size:14px;letter-spacing:.5px}#sleep-status small{display:block;font-size:10px;margin-top:5px;color:#9283a5}
+.robot-asleep .speech{opacity:0;pointer-events:none}.robot-asleep .tab-content[inert]{opacity:.38;filter:saturate(.3)}.robot-asleep .gaze-indicator{opacity:.5}.robot-asleep .pulse-ring{animation:none}
+.theme-toggle{flex-shrink:0}.focus-dock{overflow-x:auto;scrollbar-width:none}.focus-dock::-webkit-scrollbar{display:none}
+html{color-scheme:dark}html[data-theme=day]{color-scheme:light;--bg:#f4f3f9;--panel:#fff;--panel2:#eceaf4;--line:#44335f22;--text:#29243b;--muted:#6e657d;--purple:#7050ae;--cyan:#237d85;--green:#327c58}
+html[data-theme=day] body{background:var(--bg);color:var(--text)}
+html[data-theme=day] :is(.control-panel,.telemetry,dialog){background:#fff;color:var(--text);border-color:var(--line)}
+html[data-theme=day] .stage{background:radial-gradient(ellipse at 50% 35%,#eeebfa 0%,#d9d9e9 55%,#c6c7db 100%)}
+html[data-theme=day] .simulator{border-color:#ccc6dc;box-shadow:0 12px 45px #55447912}
+html[data-theme=day] :is(.speech,.audio-recovery,.tour-overlay){background:#fffffff2;color:var(--text);border-color:#c9bfdc;box-shadow:0 10px 35px #40305816}
+html[data-theme=day] :is(.speech p,.tour-overlay h2,.voice-game-intro h2,.target-word,.target-letter,.activity-question h3,.tab-content h2,.brand-name,.telemetry strong){color:#302841}
+html[data-theme=day] :is(.speech-label,.speech-label .voice-state,.tone-tag,.speech-icon,.voice-signature,.stage-title,.focus-enter,.sound-test-btn,.presentation-btn,.response-preview summary){color:#654591}
+html[data-theme=day] :is(.emotion,.response-preview,.activity-question,.voice-game-card,.voice-mode-picker button,.appearance-presets>button,.appearance-colors input,.finish-picker,.motion-card,.voice-finish){background:#f3f0f9;color:#554665;border-color:#d9cfe6}
+html[data-theme=day] :is(.emotion.selected,.appearance-presets>button[aria-pressed=true],.voice-mode-picker button[aria-pressed=true],.finish-picker button[aria-pressed=true],.activity-picker button.selected){background:#e6dcf5;color:#573284;border-color:#9777c0}
+html[data-theme=day] :is(.emotion strong,.response-preview p,.appearance-colors label,.appearance-panel .toggle-row>strong,.finish-picker button,.voice-progress,.game-feedback,.word-hint,.practice-mode,.panel-subtitle,.activity-feedback,.session-log summary,.log-text,.response-tags span,.input-note,.tour-copy){color:#71617e}
+html[data-theme=day] :is(.secondary-btn,.text-btn,.example-play,.example-slow,.record-btn,.voice-mode-picker,.listen-choices>button,.feeling-choices>button,.activity-picker,.view-switch){background:#f1edf8;color:#684491;border-color:#c6b5db}
+html[data-theme=day] :is(.panel-tabs button,.session-log time,.session-log li,.panel-subtitle,.metric-label,.stage-toolbar,.icon-btn,.motion-label,.toggle-row,.voice-eyebrow){color:#756783}
+html[data-theme=day] :is(.panel-tabs button[aria-selected=true],.nav-link.active,.view-switch button.selected){color:#634192;background:#e7def1}
+html[data-theme=day] .primary-btn{background:#7655af;color:#fff}
+html[data-theme=day] :is(.gaze-indicator,.focus-enter){background:#ffffff9e;border-color:#bcaed1;color:#665179}
+html[data-theme=day] :is(.topbar,.panel-tabs,.session-log,.telemetry>div,footer,.toggle-row){border-color:var(--line)}
+html[data-theme=day] #sleep-status{color:#645275}html[data-theme=day] #sleep-status small{color:#7c6c8e}
+html[data-theme=day] .focus-mode #workspace{background:#dad8e8}
+html[data-theme=day] .focus-mode #workspace>.control-panel{background:#fffffff2;border-color:#c9bfdc;box-shadow:0 12px 45px #55447922}
+html[data-theme=day] .focus-dock{background:#fffffff0;border-color:#c9bfdc;box-shadow:0 8px 32px #40305822}
+html[data-theme=day] .focus-dock>button{color:#75618e}html[data-theme=day] .focus-dock>button[aria-pressed=true],html[data-theme=day] .focus-dock #exit-focus{color:#63418c;background:#eee5f7}
+@media(max-width:700px){.header-actions{gap:4px}.theme-toggle{width:29px;height:32px}.focus-dock>button{min-width:33px}.focus-dock{justify-content:flex-start;width:max-content;max-width:calc(100% - 14px)}.topbar{gap:5px}.power-control span{display:none}}
+
+#sleep-status{top:auto;bottom:90px;left:22px;transform:none;padding:9px 13px;border-radius:12px;background:#272232ce;backdrop-filter:blur(12px);border:1px solid #b3a0f222}html[data-theme=day] #sleep-status{background:#ffffffe0;border-color:#d1c7df}
 </style>
 </head>
 <body>
@@ -70,11 +103,11 @@ dialog{border:1px solid #b3a0f22b;background:#1d1a26;color:var(--text);border-ra
   <symbol id="i-mic" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="13" rx="4"/><path d="M5 10v2a7 7 0 0 0 14 0v-2m-7 9v3m-4 0h8"/></symbol>
   <symbol id="i-ear" viewBox="0 0 24 24"><path d="M6 10a7 7 0 1 1 13 4c-1 2-4 2-5 5-2 5-7 3-7-1m3-8a3 3 0 0 1 6 0c0 3-4 2-4 5"/></symbol>
   <symbol id="i-turtle" viewBox="0 0 24 24"><path d="M4 16a7 7 0 0 1 14 0H4Zm3 0-1 4m9-4 1 4M8 9l3 4 3-4m-3 4v3m7-2 2-3 2 1v4h-4M3 14l-2-1"/></symbol>
-</defs></svg>
+<symbol id="i-power" viewBox="0 0 24 24"><path d="M12 2v10m-6-7a9 9 0 1 0 12 0"/></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l2 2m10 10 2 2M5 19l2-2M17 7l2-2"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 15A9 9 0 0 1 9 4a9 9 0 1 0 11 11Z"/></symbol></defs></svg>
 <header class="topbar">
   <a class="brand" href="./" aria-label="آدا، الصفحة الرئيسية"><span class="brand-mark"><svg><use href="#i-spark"/></svg></span><span class="brand-name">ADA<span>آدا</span></span></a>
   <nav aria-label="التنقل الرئيسي"><button class="nav-link active" id="nav-sim">المحاكي التفاعلي<span></span></button><button class="nav-link" id="nav-voice">ألعاب الصوت<span></span></button><button class="nav-link" data-open="about">عن آدا</button></nav>
-  <div class="header-actions"><button class="sound-test-btn" id="test-sound"><svg class="icon"><use href="#i-volume"/></svg>تجربة الصوت</button><button class="presentation-btn" id="start-tour"><svg class="icon"><use href="#i-play"/></svg>عرض للجنة</button></div>
+  <div class="header-actions"><button class="icon-btn theme-toggle" data-theme-toggle aria-label="تفعيل وضع النهار"><svg class="icon"><use href="#i-sun"/></svg></button><button class="sound-test-btn" id="test-sound"><svg class="icon"><use href="#i-volume"/></svg>تجربة الصوت</button><button class="presentation-btn" id="start-tour"><svg class="icon"><use href="#i-play"/></svg>عرض للجنة</button></div>
 </header>
 <main>
   <div class="page-heading"><div><div class="eyebrow" dir="ltr"><span></span> ADA INTERACTION LAB <small>/ 01</small></div><h1>مرحبًا، أنا <span>آدا.</span></h1></div></div>
@@ -85,13 +118,13 @@ dialog{border:1px solid #b3a0f22b;background:#1d1a26;color:var(--text);border-ra
         <div class="gaze-indicator" id="gaze-indicator" data-mode="ready"><svg class="icon"><use href="#i-eye"/></svg><span>حرّك الفأرة لأتبعك</span></div>
         <div class="stage-head"><button class="focus-enter" id="enter-focus"><svg class="icon"><use href="#i-expand"/></svg>تركيز</button><span class="stage-title">آدا</span></div>
         <canvas id="robot-canvas" aria-label="نموذج آدا ثلاثي الأبعاد. اسحب لتدويره، واستخدم مفاتيح الأسهم لتغيير زاوية المشهد." tabindex="0"></canvas>
-        <div class="loading" id="loading"><div class="loader"></div>نوقظ آدا…</div>
+        <button id="robot-power" class="robot-power" aria-label="إطفاء آدا" aria-pressed="true" title="إطفاء آدا"></button><span id="sleep-status" role="status" hidden>آدا نائمة <small>اضغط زر الصدر لإيقاظها</small></span><div class="loading" id="loading"><div class="loader"></div>نوقظ آدا…</div>
         <div class="model-callout" hidden><span class="callout-line"></span><small>EXPRESSION ENGINE</small><strong id="model-mood">تعبير الترحيب</strong></div>
         <div class="view-switch" aria-label="زاوية المشاهدة"><button data-view="front" class="selected">أمامي</button><button data-view="three">ثلاثي الأبعاد</button><button data-view="side">جانبي</button></div>
         <div class="orbit-hint" hidden><svg class="icon"><use href="#i-move"/></svg>حرّك الفأرة لأتبعك <span>·</span> اسحب للتدوير</div>
         <div class="speech" aria-live="polite"><span class="speech-icon"><svg class="icon"><use href="#i-spark"/></svg></span><div><span class="speech-label">آدا <span class="voice-state" id="voice-state">جاهزة للتواصل</span><span class="tone-tag" id="voice-tone">نبرة ودودة</span></span><p id="speech-text">مرحبًا يا صديقي! أنا آدا! هل أنت جاهز لمغامرة صغيرة؟ هيا نلعب!</p></div><button class="icon-btn" id="replay" aria-label="إعادة نطق رسالة آدا"><svg class="icon"><use href="#i-volume"/></svg></button></div>
         <div class="audio-recovery" id="audio-recovery" hidden><span id="audio-recovery-message"></span><audio id="ada-audio" controls preload="auto" playsinline aria-label="صوت آدا"></audio></div>
-        <div class="stage-toolbar"><div class="stage-caption"><span class="pulse-ring"></span><span id="robot-state">في انتظار تفاعل صغير</span></div><div class="tool-buttons"><button class="icon-btn" id="sound-toggle" aria-label="كتم الصوت" aria-pressed="true"><svg class="icon"><use href="#i-volume"/></svg></button><button class="icon-btn" id="reset-view" aria-label="إعادة المشهد"><svg class="icon"><use href="#i-reset"/></svg></button><button class="icon-btn" id="capture" aria-label="حفظ صورة آدا"><svg class="icon"><use href="#i-camera"/></svg></button><button class="icon-btn" id="fullscreen" aria-label="وضع التركيز"><svg class="icon"><use href="#i-expand"/></svg></button></div></div>
+        <div class="stage-toolbar"><div class="stage-caption"><span class="pulse-ring"></span><span id="robot-state">في انتظار تفاعل صغير</span></div><div class="tool-buttons"><button class="power-control" id="power-toggle" aria-label="إطفاء آدا" aria-pressed="true"><svg class="icon"><use href="#i-power"/></svg><span>إطفاء</span></button><button class="icon-btn" id="sound-toggle" aria-label="كتم الصوت" aria-pressed="true"><svg class="icon"><use href="#i-volume"/></svg></button><button class="icon-btn" id="reset-view" aria-label="إعادة المشهد"><svg class="icon"><use href="#i-reset"/></svg></button><button class="icon-btn" id="capture" aria-label="حفظ صورة آدا"><svg class="icon"><use href="#i-camera"/></svg></button><button class="icon-btn" id="fullscreen" aria-label="وضع التركيز"><svg class="icon"><use href="#i-expand"/></svg></button></div></div>
         <div class="tour-overlay" id="tour-overlay" hidden><div class="tour-top"><span>عرض آدا للجنة</span><button class="icon-btn" id="end-tour" aria-label="إنهاء العرض"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="tour-progress"><i></i><i></i><i></i><i></i></div><span class="tour-step" id="tour-step">01 / 04</span><h2 id="tour-title"></h2><p id="tour-copy"></p><button class="primary-btn" id="tour-next">التالي <svg class="icon"><use href="#i-arrow"/></svg></button></div>
       </div>
       <div class="telemetry" aria-label="حالة المحاكي"><div><span class="metric-label"><i class="tiny-dot purple"></i>الحالة</span><strong id="metric-emotion">ترحيب <small>WELCOME</small></strong></div><div><span class="metric-label"><i class="tiny-dot cyan"></i>الرأس</span><strong dir="ltr" id="metric-angle">0° <small>YAW</small></strong></div><div><span class="metric-label"><i class="tiny-dot green"></i>اللحظات</span><strong dir="ltr"><span id="metric-count">00</span> <small>INTERACTIONS</small></strong></div></div>
@@ -128,7 +161,7 @@ dialog{border:1px solid #b3a0f22b;background:#1d1a26;color:var(--text);border-ra
       <div class="tab-content" id="motion-panel" role="tabpanel" aria-labelledby="motion-tab" hidden><h2>حركة آدا.</h2><div class="range-control"><label for="yaw">التفات الرأس <output id="yaw-output" dir="ltr">0°</output></label><input type="range" id="yaw" min="-40" max="40" value="0"><div><span>يسار</span><span>يمين</span></div></div><div class="range-control"><label for="pitch">ميل الرأس <output id="pitch-output" dir="ltr">0°</output></label><input type="range" id="pitch" min="-20" max="20" value="0"><div><span>أعلى</span><span>أسفل</span></div></div><label class="toggle-row"><span><strong>تتبّع المؤشر</strong><small>العينان والرأس</small></span><input id="gaze" type="checkbox" checked><span class="switch"></span></label><label class="toggle-row"><span><strong>استكشاف الهيكل</strong><small>شبكة النموذج</small></span><input id="wireframe" type="checkbox"><span class="switch"></span></label><button class="secondary-btn" id="reset-motion"><svg class="icon"><use href="#i-reset"/></svg>إعادة الحركة</button><p class="input-note">زوايا تصوّرية للمحاكاة.</p></div>
       <details class="session-log"><summary>سجل الجلسة</summary><ol id="event-log" aria-live="polite"><li><span class="log-dot"></span><span>آدا هنا، ومستعدة للتواصل.</span><time dir="ltr">00:00</time></li></ol></details>
     </aside>
-    <div class="focus-dock" id="focus-dock" hidden aria-label="أدوات وضع التركيز"><button data-focus-tab="interaction"><svg class="icon"><use href="#i-spark"/></svg><span>تفاعل</span></button><button data-focus-tab="voice"><svg class="icon"><use href="#i-mic"/></svg><span>صوت</span></button><button data-focus-tab="appearance"><svg class="icon"><use href="#i-eye"/></svg><span>مظهر</span></button><button data-focus-tab="motion"><svg class="icon"><use href="#i-move"/></svg><span>حركة</span></button><span class="dock-separator"></span><button id="focus-sound" aria-label="كتم الصوت" aria-pressed="true"><svg class="icon"><use href="#i-volume"/></svg></button><button id="focus-reset" aria-label="إعادة زاوية المشهد"><svg class="icon"><use href="#i-reset"/></svg></button><button id="focus-captions" aria-label="إظهار نص آدا" aria-pressed="false"><svg class="icon"><use href="#i-book"/></svg><span>نص</span></button><button id="focus-native-fullscreen" aria-label="ملء شاشة الجهاز"><svg class="icon"><use href="#i-expand"/></svg></button><button id="exit-focus" aria-label="الرجوع للشاشة العادية"><svg class="icon"><use href="#i-close"/></svg><span>رجوع</span></button></div>
+    <div class="focus-dock" id="focus-dock" hidden aria-label="أدوات وضع التركيز"><button id="focus-power" aria-label="إطفاء آدا" aria-pressed="true"><svg class="icon"><use href="#i-power"/></svg><span>إطفاء</span></button><button class="icon-btn theme-toggle" data-theme-toggle aria-label="تفعيل وضع النهار"><svg class="icon"><use href="#i-sun"/></svg></button><button data-focus-tab="interaction"><svg class="icon"><use href="#i-spark"/></svg><span>تفاعل</span></button><button data-focus-tab="voice"><svg class="icon"><use href="#i-mic"/></svg><span>صوت</span></button><button data-focus-tab="appearance"><svg class="icon"><use href="#i-eye"/></svg><span>مظهر</span></button><button data-focus-tab="motion"><svg class="icon"><use href="#i-move"/></svg><span>حركة</span></button><span class="dock-separator"></span><button id="focus-sound" aria-label="كتم الصوت" aria-pressed="true"><svg class="icon"><use href="#i-volume"/></svg></button><button id="focus-reset" aria-label="إعادة زاوية المشهد"><svg class="icon"><use href="#i-reset"/></svg></button><button id="focus-captions" aria-label="إظهار نص آدا" aria-pressed="false"><svg class="icon"><use href="#i-book"/></svg><span>نص</span></button><button id="focus-native-fullscreen" aria-label="ملء شاشة الجهاز"><svg class="icon"><use href="#i-expand"/></svg></button><button id="exit-focus" aria-label="الرجوع للشاشة العادية"><svg class="icon"><use href="#i-close"/></svg><span>رجوع</span></button></div>
   </div>
   <footer><p><span class="footer-logo">ADA</span>مشروع قيد التطوير</p><a href="https://program2.syrian-technocrats.org/p/ada" target="_blank" rel="noopener noreferrer">المشروع الأصلي <span>↗</span></a></footer>
 </main>
@@ -53633,6 +53666,7 @@ const lerp = THREE.MathUtils.lerp;
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const startedAt = Date.now();
 const state = { emotion: 'welcome', selected: 'happy', count: 0, sound: true, speaking: false, speakingUntil: 0, listening: false, yaw: 0, pitch: 0, gaze: true, wireframe: false, pointerX: 0, pointerY: 0, pointerActive: false, cameraAngle: 0, cameraTilt: 0, cameraDistance: 7.5, tour: -1, activity: 'colors', colorQuestion: 0, feelingQuestion: 0, breathing: false, breathStart: 0 };
+state.powered=true;
 state.focus=false;state.focusControls=false;
 const APPEARANCE_THEMES={violet:{body:'#d4d0e0',eyes:'#9be5e8',accent:'#b3a0f2'},mint:{body:'#85c3b9',eyes:'#ffe3a5',accent:'#9fe6db'},space:{body:'#6668a0',eyes:'#ecbaff',accent:'#9faaff'}};
 const DEFAULT_APPEARANCE={...APPEARANCE_THEMES.violet,theme:'violet',finish:'satin',antenna:true,baseLights:true};
@@ -53709,6 +53743,7 @@ async function speakBrowser(text, token) {
   speechSynthesis.resume();speechSynthesis.speak(activeUtterance);
 }
 function speak(text, options = {}) {
+  if(!state.powered) return Promise.resolve(false);
   if(voiceGames?.isCapturing())voiceGames.deactivate();
   stopSpeech();
   if(!state.sound) return Promise.resolve(false);
@@ -53736,6 +53771,7 @@ function speak(text, options = {}) {
 }
 function setSound(value) { state.sound=value;$('#sound-toggle').setAttribute('aria-pressed',String(value));$('#sound-toggle').setAttribute('aria-label',value?'كتم الصوت':'تشغيل الصوت');$('#sound-toggle use').setAttribute('href',value?'#i-volume':'#i-muted');$('#focus-sound').setAttribute('aria-pressed',String(value));$('#focus-sound').setAttribute('aria-label',value?'كتم الصوت':'تشغيل الصوت');$('#focus-sound use').setAttribute('href',value?'#i-volume':'#i-muted');if(!value)stopSpeech();else voiceStatus('الصوت جاهز'); }
 function say(text, emotion = state.emotion, shouldCount = false, options = {}) {
+  if(!state.powered){toast('آدا نائمة. اضغط زر التشغيل لإيقاظها.');return Promise.resolve(false);}
   const contextTone=CLIP_EXPRESSIONS[text]?.tone;
   state.emotion=emotions[contextTone]?contextTone:emotion;
   const data = emotions[state.emotion]; $('#model-mood').textContent = data.name;
@@ -53844,7 +53880,7 @@ const tourSteps=[
   { title:'اللعب يفتح باب التعلّم.', copy:'جرّب نشاط الألوان في مساحة التعلّم. الإجابة الصحيحة تلقى تشجيعًا، وكل محاولة تستحق فرصة أخرى.', emotion:'happy',tab:'learning',text:'لنتعلّم معًا! هل تستطيع أن تجد اللون الأزرق؟' },
   { title:'تصوّر اليوم. إمكانات الغد.', copy:'هذه محاكاة لتوضيح الفكرة. الروبوت الفعلي قيد التطوير، والعمل على العربية والأنشطة المساندة جزء من رؤيته.', emotion:'welcome',tab:'interaction',text:'كل لحظة تواصل قد تكون بداية جميلة. أنا آدا، إننا نهمس بالأمل.' }
 ];
-function startTour(){ $$('dialog[open]').forEach(el=>el.close()); stopBreathing(); resetMotion(); setView('front'); state.tour=0; $('#tour-overlay').hidden=false; $('#stage').classList.add('touring'); $('#stage').scrollIntoView({behavior:reducedMotion?'instant':'smooth',block:'center'}); showTourStep(); log('بدء العرض الموجّه للجنة'); }
+function startTour(){ if(!state.powered)setPower(true); $$('dialog[open]').forEach(el=>el.close()); stopBreathing(); resetMotion(); setView('front'); state.tour=0; $('#tour-overlay').hidden=false; $('#stage').classList.add('touring'); $('#stage').scrollIntoView({behavior:reducedMotion?'instant':'smooth',block:'center'}); showTourStep(); log('بدء العرض الموجّه للجنة'); }
 function showTourStep(){ const step=tourSteps[state.tour]; $('#tour-step').textContent=`0${state.tour+1} / 04`; $('#tour-title').textContent=step.title; $('#tour-copy').textContent=step.copy; $$('.tour-progress i').forEach((el,i)=>el.classList.toggle('done',i<=state.tour)); $('#tour-next').innerHTML=`${state.tour===3?'إنهاء العرض':'التالي'} <svg class="icon"><use href="#i-arrow"/></svg>`; setTab(step.tab); if(state.tour===1) selectEmotion('sad'); if(state.tour===2){state.colorQuestion=0;showActivity('colors');} say(step.text,step.emotion,true); }
 function nextTour(){ if(state.tour>=3) endTour(); else {state.tour++;showTourStep();} }
 function endTour(){ state.tour=-1; $('#tour-overlay').hidden=true; $('#stage').classList.remove('touring'); stopSpeech(); stopBreathing(); log('اكتمل العرض، الاستكشاف الحر متاح'); }
@@ -53854,6 +53890,8 @@ $('#start-tour').addEventListener('click',startTour); $('#guide-start').addEvent
 const canvas=$('#robot-canvas');
 const shellMaterials=[];
 let renderer, scene, camera, headPivot, robot, eyes=[], brows=[], mouth=[], antennaGlow, chestGlow, faceGlow;
+let powerLevel=1, sceneDay=0, studioLights=[], sleepDetails=[],chestButton;
+const powerPosition=new THREE.Vector3();
 let paletteMaterials=null,antennaParts=[],floorRings=[],focusCameraOffset=0;
 const motor={yaw:0,pitch:0,tilt:0};
 const gazeMotion={x:0,y:0};
@@ -53872,10 +53910,10 @@ function init3D(){
   renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,preserveDrawingBuffer:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.24;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
   scene=new THREE.Scene();scene.fog=new THREE.FogExp2('#211e2c',.035);camera=new THREE.PerspectiveCamera(39,1,.1,60);
   const envCanvas=document.createElement('canvas');envCanvas.width=1024;envCanvas.height=512;const ctx=envCanvas.getContext('2d');const grad=ctx.createLinearGradient(0,0,0,512);grad.addColorStop(0,'#c5c3de');grad.addColorStop(.45,'#606073');grad.addColorStop(1,'#17151e');ctx.fillStyle=grad;ctx.fillRect(0,0,1024,512);ctx.fillStyle='#f9f7ff';ctx.fillRect(140,100,100,220);ctx.fillStyle='#c8c5ff';ctx.fillRect(710,100,90,260);const envTex=new THREE.CanvasTexture(envCanvas);envTex.mapping=THREE.EquirectangularReflectionMapping;envTex.colorSpace=THREE.SRGBColorSpace;const pmrem=new THREE.PMREMGenerator(renderer);scene.environment=pmrem.fromEquirectangular(envTex).texture;envTex.dispose();pmrem.dispose();
-  scene.add(new THREE.HemisphereLight('#dfd7ff','#201b32',2.3));
-  const key=new THREE.DirectionalLight('#f5eeff',3.6);key.position.set(-3,6,5);key.castShadow=true;key.shadow.mapSize.set(1024,1024);key.shadow.camera.left=-5;key.shadow.camera.right=5;key.shadow.camera.top=6;key.shadow.camera.bottom=-4;key.shadow.normalBias=.025;key.shadow.bias=-.0002;key.shadow.radius=4;scene.add(key);
-  const rim=new THREE.DirectionalLight('#a393f1',3.5);rim.position.set(4,3,-2);scene.add(rim);
-  const fill=new THREE.PointLight('#8bdde6',8,8);fill.position.set(-3,2,2);scene.add(fill);
+  const ambient=new THREE.HemisphereLight('#dfd7ff','#201b32',2.3);scene.add(ambient);studioLights.push(ambient);
+  const key=new THREE.DirectionalLight('#f5eeff',3.6);key.position.set(-3,6,5);key.castShadow=true;key.shadow.mapSize.set(1024,1024);key.shadow.camera.left=-5;key.shadow.camera.right=5;key.shadow.camera.top=6;key.shadow.camera.bottom=-4;key.shadow.normalBias=.025;key.shadow.bias=-.0002;key.shadow.radius=4;scene.add(key);studioLights.push(key);
+  const rim=new THREE.DirectionalLight('#a393f1',3.5);rim.position.set(4,3,-2);scene.add(rim);studioLights.push(rim);
+  const fill=new THREE.PointLight('#8bdde6',8,8);fill.position.set(-3,2,2);scene.add(fill);studioLights.push(fill);
   const shell=new THREE.MeshPhysicalMaterial({color:'#d4d0e0',metalness:.25,roughness:.31,clearcoat:.7,clearcoatRoughness:.22});
   const shellDark=new THREE.MeshPhysicalMaterial({color:'#aaa3c6',metalness:.35,roughness:.29,clearcoat:.5});
   const chrome=new THREE.MeshStandardMaterial({color:'#7e779a',metalness:.85,roughness:.25});
@@ -53893,8 +53931,10 @@ function init3D(){
   cylinder(.38,.48,.12,chrome,robot,0,1.29,0);cylinder(.27,.30,.29,dark,robot,0,1.46,0);cylinder(.30,.30,.08,shellDark,robot,0,1.56,0);cylinder(.29,.29,.025,lavender,robot,0,1.61,0);
   for(let i=0;i<4;i++) cylinder(.282,.282,.014,chrome,robot,0,1.35+i*.056,0);
   const chestText=mesh(new THREE.PlaneGeometry(.54,.17),new THREE.MeshBasicMaterial({map:labelTexture('A D A'),transparent:true,depthWrite:false}),robot,0,.79,.491);
-  chestGlow=mesh(new THREE.SphereGeometry(.045,24,16),lavender,robot,0,.52,.50);
+  chestGlow=mesh(new THREE.SphereGeometry(.054,24,16),lavender.clone(),robot,0,.52,.50);
   const chestRing=mesh(new THREE.TorusGeometry(.075,.008,10,40),chrome,robot,0,.52,.499);
+  chestButton=mesh(new THREE.TorusGeometry(.033,.005,8,32,Math.PI*1.65),led.clone(),robot,0,.52,.557);chestButton.rotation.z=Math.PI*.68;
+  mesh(new THREE.CylinderGeometry(.005,.005,.038,12),chestButton.material,robot,0,.552,.557);
   headPivot=new THREE.Group();headPivot.position.set(0,1.65,0);robot.add(headPivot);
   const head=new THREE.Group();head.position.y=.94;headPivot.add(head);
   mesh(roundedGeometry(2.05,1.86,1.34,.49,.12),shell,head,0,0,0);
@@ -53917,9 +53957,10 @@ function init3D(){
     const eye=mesh(roundedGeometry(.255,.36,.034,.12,.012),led,eyeGroup,0,0,0);
     const light=mesh(new THREE.PlaneGeometry(.83,.83),new THREE.MeshBasicMaterial({map:glowTex,transparent:true,opacity:.42,depthWrite:false,blending:THREE.AdditiveBlending}),eyeGroup,0,0,-.007);
     const glint=mesh(new THREE.SphereGeometry(.025,16,12),new THREE.MeshBasicMaterial({color:'#efffff'}),eyeGroup,-.06,.075,.026);glint.scale.z=.3;
-    eyes.push({group:eyeGroup,eye,light,side});
+    eyes.push({group:eyeGroup,eye,light,side});sleepDetails.push(glint.material);
     const dots=[];for(let i=0;i<16;i++)dots.push(mesh(new THREE.SphereGeometry(.012,8,6),led,head,0,0,.80));brows.push({dots,side});
     const cheek=mesh(new THREE.PlaneGeometry(.35,.17),new THREE.MeshBasicMaterial({map:glowTex,transparent:true,opacity:.10,depthWrite:false,blending:THREE.AdditiveBlending,color:'#cba9fb'}),head,side*.64,-.22,.808);
+    sleepDetails.push(cheek.material);
   }
   for(let i=0;i<42;i++) mouth.push(mesh(new THREE.SphereGeometry(.017,10,8),led,head,0,0,.807));
   const reflectedLight=mesh(roundedGeometry(.47,.027,.006,.01,.001),new THREE.MeshBasicMaterial({color:'#96a4c1',transparent:true,opacity:.16}),head,-.43,.57,.797);reflectedLight.rotation.z=.06;
@@ -53935,17 +53976,19 @@ function animate(now){
   requestAnimationFrame(animate);if(document.hidden) return;
   const dt=Math.min((now-lastTime)/1000||.016,.06);lastTime=now;const t=now/1000;const smooth=1-Math.exp(-dt*6);const data=emotions[state.emotion];
   for(const key of Object.keys(expression)) expression[key]=lerp(expression[key],data[key],smooth);
-  const idle=reducedMotion?0:Math.sin(t*.75)*.018;const breath=reducedMotion?0:Math.sin(t*1.25)*.012;
+  powerLevel=lerp(powerLevel,state.powered?1:0,1-Math.exp(-dt*(reducedMotion?16:2.5)));
+  const awake=powerLevel;
+  const idle=reducedMotion?0:Math.sin(t*.75)*.018*awake;const breath=reducedMotion?0:Math.sin(t*1.25)*.012*awake;
   robot.position.y=.08+breath;
-  const tracking=state.gaze && state.pointerActive && !state.listening;
+  const tracking=state.powered && state.gaze && state.pointerActive && !state.listening;
   const motionScale=reducedMotion?.45:1;
   // Eyes acquire the pointer first, followed by a wider, smoothly damped head turn.
   const eyeSmooth=1-Math.exp(-dt*14);
   gazeMotion.x=lerp(gazeMotion.x,tracking?state.pointerX*motionScale:0,eyeSmooth);
   gazeMotion.y=lerp(gazeMotion.y,tracking?state.pointerY*motionScale:0,eyeSmooth);
-  motor.yaw=lerp(motor.yaw,clamp(THREE.MathUtils.degToRad(state.yaw)+gazeMotion.x*.52+idle,-.95,.95),smooth);
-  motor.pitch=lerp(motor.pitch,clamp(THREE.MathUtils.degToRad(state.pitch)+gazeMotion.y*.28+idle*.5,-.60,.60),smooth);
-  motor.tilt=lerp(motor.tilt,data.tilt-gazeMotion.x*.055+idle*.4,smooth);
+  motor.yaw=lerp(motor.yaw,clamp(THREE.MathUtils.degToRad(state.yaw)*awake+gazeMotion.x*.52+idle,-.95,.95),smooth);
+  motor.pitch=lerp(motor.pitch,clamp(THREE.MathUtils.degToRad(state.pitch)*awake+gazeMotion.y*.28+idle*.5+(1-awake)*.25,-.60,.60),smooth);
+  motor.tilt=lerp(motor.tilt,data.tilt*awake-gazeMotion.x*.055+idle*.4,smooth);
   headPivot.rotation.set(motor.pitch,motor.yaw,motor.tilt);
   $('#metric-angle').innerHTML=`${Math.round(THREE.MathUtils.radToDeg(motor.yaw))}° <small>YAW</small>`;
   const blinkPhase=(t%4.6);const blink=reducedMotion?1:blinkPhase<.13?Math.max(.065,Math.abs(blinkPhase-.065)/.065):1;
@@ -53953,21 +53996,36 @@ function animate(now){
   let energy=0;if(talking&&voiceAnalyser&&voiceSamples&&voiceContext?.state==='running'){voiceAnalyser.getByteTimeDomainData(voiceSamples);energy=clamp(Math.sqrt(voiceSamples.reduce((sum,n)=>sum+((n-128)/128)**2,0)/voiceSamples.length)*5,0,1);}else if(talking)energy=(Math.sin(t*15)+1)*.18;
   voiceEnergy=lerp(voiceEnergy,energy,1-Math.exp(-dt*18));
   const talkAmount=reducedMotion?0:voiceEnergy*.14;
-  eyes.forEach(({group,eye,light,side})=>{group.position.x=side*.39+gazeMotion.x*.145;group.position.y=.11-gazeMotion.y*.105;eye.scale.y=Math.max(.06,expression.eyeY*blink);eye.rotation.z=-side*expression.eyeTilt;light.material.opacity=.36+Math.sin(t)*.03;});
+  eyes.forEach(({group,eye,light,side})=>{group.position.x=side*.39+gazeMotion.x*.145;group.position.y=.11-gazeMotion.y*.105;eye.scale.y=Math.max(.06,expression.eyeY*blink*awake);eye.rotation.z=-side*expression.eyeTilt;light.material.opacity=(.36+Math.sin(t)*.03)*awake;});
   brows.forEach(({dots,side})=>{dots.forEach((dot,i)=>{const x=i/(dots.length-1)*.30-.15;dot.position.x=side*.39+x+gazeMotion.x*.04;dot.position.y=.415+expression.brow-gazeMotion.y*.025+Math.sin(i/(dots.length-1)*Math.PI)*.025+side*x*(state.emotion==='sad'?-.55:.04);dot.scale.set(1.3,.8,1);});});
-  mouth.forEach((dot,i)=>{const p=i/(mouth.length-1),a=p*Math.PI*2;if(talking&&talkAmount>.012){dot.position.set(Math.cos(a)*(.23+voiceEnergy*.04),-.31+Math.sin(a)*(.02+talkAmount),.807);}else if(state.emotion==='surprised'){dot.position.set(Math.cos(a)*.085,-.295+Math.sin(a)*(.105+talkAmount),.807);}else{const x=(p-.5)*.63;dot.position.set(x,-.23-Math.sin(p*Math.PI)*expression.smile,.807);} });
-  chestGlow.scale.setScalar(1+Math.sin(t*2)*.07);faceGlow.intensity=talking?.025:.012;
+  mouth.forEach((dot,i)=>{const p=i/(mouth.length-1),a=p*Math.PI*2;if(talking&&talkAmount>.012){dot.position.set(Math.cos(a)*(.23+voiceEnergy*.04),-.31+Math.sin(a)*(.02+talkAmount),.807);}else if(state.emotion==='surprised'){dot.position.set(Math.cos(a)*.085,-.295+Math.sin(a)*(.105+talkAmount),.807);}else{const x=(p-.5)*.63;dot.position.set(x,-.23-Math.sin(p*Math.PI)*(expression.smile*awake+.015*(1-awake)),.807);} });
+  chestGlow.scale.setScalar(1+Math.sin(t*2)*.07*awake);faceGlow.intensity=(talking?.025:.012)*awake;
+  paletteMaterials.led.color.set(appearance.eyes).multiplyScalar(.018+.982*awake);
+  paletteMaterials.accent.color.set(appearance.accent).multiplyScalar(.035+.965*awake);
+  chestGlow.material.color.set(appearance.accent).multiplyScalar(.1+.9*awake);
+  chestButton.material.color.set(appearance.eyes).multiplyScalar(.22+.78*awake);
+  sleepDetails.forEach(m=>{m.transparent=true;m.opacity=awake*(m===sleepDetails[0]||m===sleepDetails[2]?1:.10);});
+  antennaParts[2].intensity=.35*awake;
+  floorRings.forEach(r=>{if(r.material.transparent)r.material.opacity=(r.geometry.parameters.innerRadius>2?.06:.18)*awake;});
+  sceneDay=lerp(sceneDay,document.documentElement.dataset.theme==='day'?1:0,smooth);
+  studioLights[0].intensity=2.3+sceneDay*.5;studioLights[2].intensity=3.5-sceneDay*1.5;
+  scene.fog.color.setRGB(lerp(.015,.72,sceneDay),lerp(.013,.74,sceneDay),lerp(.025,.82,sceneDay));
   camAngle=lerp(camAngle,state.cameraAngle,smooth*.7);camTilt=lerp(camTilt,state.cameraTilt,smooth*.7);camDistance=lerp(camDistance,state.cameraDistance,smooth*.7);
   const portrait=width<520;const distance=camDistance+(portrait?.35:0);const targetY=1.64;focusCameraOffset=lerp(focusCameraOffset,state.focus&&state.focusControls&&width>800?.65:0,smooth);camera.position.set(Math.sin(camAngle)*distance,2.8+camTilt*3,Math.cos(camAngle)*distance);camera.lookAt(focusCameraOffset,targetY,0);
   renderer.render(scene,camera);
+  chestGlow.getWorldPosition(powerPosition);powerPosition.project(camera);
+  const powerButton=$('#robot-power');
+  powerButton.style.left=((powerPosition.x+1)*width/2)+'px';powerButton.style.top=((1-powerPosition.y)*height/2)+'px';
+  powerButton.hidden=Math.cos(camAngle)<.25||Math.abs(powerPosition.x)>1||Math.abs(powerPosition.y)>1;
+
 }
 let pointerStart=null, lastPointer=null;
 function updateGazeIndicator(){
   const indicator=$('#gaze-indicator');
-  const mode=!state.gaze?'off':state.pointerActive?'tracking':'ready';
+  const mode=!state.powered?'sleep':!state.gaze?'off':state.pointerActive?'tracking':'ready';
   if(indicator.dataset.mode===mode)return;
   indicator.dataset.mode=mode;
-  indicator.querySelector('span').textContent=mode==='off'?'تتبّع المؤشر متوقف':mode==='tracking'?'عيناي ورأسي يتبعانك':'حرّك الفأرة لأتبعك';
+  indicator.querySelector('span').textContent=mode==='sleep'?'آدا نائمة':mode==='off'?'تتبّع المؤشر متوقف':mode==='tracking'?'عيناي ورأسي يتبعانك':'حرّك الفأرة لأتبعك';
 }
 function trackPointer(e){
   if(e.pointerType==='touch')return;
@@ -53976,7 +54034,7 @@ function trackPointer(e){
   // Aim around the face rather than the centre of the whole stage, including its controls.
   state.pointerX=Math.sin(clamp((e.clientX-r.left-r.width*(state.focus&&state.focusControls&&r.width>800?.42:.5))/(r.width*.5),-1,1)*Math.PI/2);
   state.pointerY=Math.sin(clamp((e.clientY-r.top-r.height*.32)/(r.height*.46),-1,1)*Math.PI/2);
-  state.pointerActive=state.gaze && !pointerStart && !document.querySelector('dialog[open]');
+  state.pointerActive=state.powered && state.gaze && !pointerStart && !document.querySelector('dialog[open]');
   updateGazeIndicator();
 }
 function releaseGaze(){lastPointer=null;state.pointerActive=false;updateGazeIndicator();}
@@ -53998,6 +54056,33 @@ try {init3D();}catch(error){console.error('ADA scene:',error);$('#loading').clas
 if(location.hash==='#focus')enterFocus();
 document.addEventListener('visibilitychange',()=>{lastTime=performance.now();if(document.hidden)stopSpeech();});
 window.addEventListener('pagehide',()=>{stopSpeech();clearInterval(breathTimer);});
+
+// Power is independent from the page theme and the user's sound preference.
+function setPower(on){
+  state.powered=on;
+  if(!on){stopSpeech();voiceGames?.deactivate();stopBreathing();if(state.tour>=0)endTour();state.listening=false;state.pointerActive=false;}
+  document.body.classList.toggle('robot-asleep',!on);
+  for(const id of ['robot-power','power-toggle','focus-power']){const b=$('#'+id);b.setAttribute('aria-pressed',String(on));b.setAttribute('aria-label',on?'إطفاء آدا':'تشغيل آدا');b.title=on?'إطفاء آدا':'تشغيل آدا';}
+  $('#power-toggle span').textContent=on?'إطفاء':'تشغيل';$('#focus-power span').textContent=on?'إطفاء':'تشغيل';
+  for(const id of ['interaction-panel','voice-panel','learning-panel','motion-panel'])$('#'+id).inert=!on;
+  $('#sleep-status').hidden=on;
+  $('#metric-emotion').innerHTML=on?'ترحيب <small>WELCOME</small>':'نائمة <small>SLEEP</small>';
+  $('#robot-state').textContent=on?'جاهزة للتواصل':'نائمة — اضغط زر التشغيل';
+  voiceStatus(on?'الصوت جاهز':'آدا نائمة');updateGazeIndicator();
+  if(on){state.emotion='welcome';say(emotions.welcome.text,'welcome');}
+  log(on?'تشغيل آدا':'إطفاء آدا — وضع النوم');
+}
+for(const id of ['robot-power','power-toggle','focus-power'])$('#'+id).addEventListener('click',()=>setPower(!state.powered));
+function setPageTheme(theme){
+  document.documentElement.dataset.theme=theme;
+  const day=theme==='day';
+  for(const b of $$('[data-theme-toggle]')){b.setAttribute('aria-label',day?'تفعيل وضع الليل':'تفعيل وضع النهار');b.title=day?'وضع الليل':'وضع النهار';b.querySelector('use').setAttribute('href',day?'#i-moon':'#i-sun');}
+  $('meta[name="theme-color"]').content=day?'#f4f3f9':'#101016';
+  try{localStorage.setItem('ada-page-theme',theme);}catch{}
+}
+let initialTheme='night';try{initialTheme=localStorage.getItem('ada-page-theme')||(matchMedia('(prefers-color-scheme: light)').matches?'day':'night');}catch{}
+setPageTheme(initialTheme==='day'?'day':'night');
+$$('[data-theme-toggle]').forEach(b=>b.addEventListener('click',()=>setPageTheme(document.documentElement.dataset.theme==='day'?'night':'day')));
 
 </script>
 <!-- Third party licenses
