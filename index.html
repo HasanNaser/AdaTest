@@ -53486,7 +53486,7 @@ const WORDS = [
   {id:'cat',display:'قِطَّة',say:'قطة',icon:'cat',hint:'صديقة صغيرة تقول: مياو'}
 ];
 const LETTERS = [
-  {id:'alef',display:'أ',say:'ألف',hint:'أَلِف · بداية ألوان جميلة',aliases:['ألف','الف','أ','ا']},
+  {id:'alef',display:'أ',say:'ألف',hint:'أَلِف · بداية ألوان جميلة',aliases:['ألف','أ','1000','1 000','١٠٠٠','١ ٠٠٠','۱۰۰۰','۱ ۰۰۰']},
   {id:'baa',display:'ب',say:'باء',hint:'بَاء · أول حرف في بَيْت',aliases:['باء','با','ب']},
   {id:'taa',display:'ت',say:'تاء',hint:'تَاء · أول حرف في تُفَّاحَة',aliases:['تاء','تا','ت']},
   {id:'meem',display:'م',say:'ميم',hint:'مِيم · أول حرف في مَامَا',aliases:['ميم','م']},
@@ -53512,6 +53512,10 @@ function normalizeArabic(text='') {
 function matchesTarget(transcript,aliases) {
   const normalized = normalizeArabic(transcript);
   return Boolean(normalized) && aliases.some(alias => normalizeArabic(alias) === normalized);
+}
+function matchesLetter(transcript, card) {
+  const name = normalizeArabic(transcript).replace(/^(?:حرف|الحرف) /, '');
+  return matchesTarget(name, [...card.aliases, `ال${card.say}`]);
 }
 function sessionDeck(mode,rotation=0) {
   const pool=mode==='letters'?LETTERS:mode==='listen'?[WORDS[3],WORDS[5],WORDS[4],WORDS[2],WORDS[6],WORDS[7]]:WORDS;
@@ -53549,7 +53553,7 @@ function mountVoiceGames({host,say,play,stopSpeech,onAttempt,voiceName,onListeni
     if(micContext){void micContext.close().catch(()=>{});micContext=null;}
     if(listeningReported){listeningReported=false;onListening(false);}
   }
-  function stopRecognition(){if(recognizer){recognizer.onresult=recognizer.onerror=recognizer.onend=null;try{recognizer.abort();}catch{}recognizer=null;}}
+  function stopRecognition(){if(recognizer){recognizer.onresult=recognizer.onaudiostart=recognizer.onerror=recognizer.onend=null;try{recognizer.abort();}catch{}recognizer=null;}}
   function cancelCapture(){operation++;if(recorder){recorder.ondataavailable=recorder.onstop=recorder.onerror=null;if(recorder.state!=='inactive')try{recorder.stop();}catch{}recorder=null;}stopRecognition();releaseMic();if(phase==='recording'||phase==='permission')phase='ready';}
   function privacyText(){return matchEnabled&&!localRecognition?'التسجيل في هذا التبويب. مطابقة الكلمات قد تستخدم خدمة المتصفح عبر الإنترنت.':'تسجيل مؤقت في هذا التبويب فقط. يُحذف عند تغيير الجولة.';}
   function recordLabel() {
@@ -53566,7 +53570,7 @@ function mountVoiceGames({host,say,play,stopSpeech,onAttempt,voiceName,onListeni
       <div class="voice-game-card ${mode==='letters'?'letter-card':''}" id="voice-game-card">
         <span class="game-step-label">${mode==='listen'?'ما الصورة؟':mode==='letters'?'اسمع الحرف':'اسمع وكرّر'}</span>
         ${mode==='listen'?`<div class="listening-orb">${icon('ear')}<i></i><i></i><i></i></div>`:mode==='letters'?`<div class="target-letter">${card.display}</div>`:`<div class="target-art">${art(card.icon)}</div><div class="target-word">${card.display}</div>`}
-        ${mode==='letters'?`<p class="word-hint">${card.say}</p>`:''}
+        ${mode==='letters'?`<p class="word-hint">حرف ال${card.say}</p>`:''}
         <div class="example-buttons"><button class="example-play" id="example-play">${icon('volume')} اسمع</button><button class="example-slow" id="example-slow" aria-label="استماع ببطء">${icon('turtle')} ببطء</button></div>
         ${mode==='listen'?`<div class="listen-choices">${listenOptions(card).map(c=>`<button data-listen-choice="${c.id}">${art(c.icon)}<span>${c.display}</span></button>`).join('')}</div>`:`<div class="your-turn"><div class="turn-divider"><span></span><span></span></div><button class="record-btn" id="record-attempt">${icon('mic')}<span>${recordLabel()}</span><small>${manual?'✦':'6 ثوانٍ'}</small></button><div class="mic-level" id="mic-level" hidden aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="attempt-playback" id="attempt-playback" hidden><span>صوتك، كما قلته</span><audio id="attempt-audio" controls aria-label="استمع لمحاولتك"></audio></div>${Recognition&&!manual?'<button class="practice-mode" id="record-only">تسجيل للتدرّب فقط</button>':''}<button class="practice-mode" id="practice-mode">${manual?'استخدم الميكروفون':'دون ميكروفون'}</button></div>`}
         <p class="game-feedback" id="game-feedback" role="status">${'على مهلك.'}</p>
@@ -53620,7 +53624,7 @@ function mountVoiceGames({host,say,play,stopSpeech,onAttempt,voiceName,onListeni
     phase='review';award();
     if (kind === 'matched') {
       showMessage(`صحيح! سمعت ${mode === 'letters' ? 'الحرف المطلوب' : 'الكلمة المطلوبة'}.`, 'success');
-      say(GAME_SPEECH.matched, 'happy');
+      say(mode === 'letters' ? GAME_SPEECH.attempt : GAME_SPEECH.matched, 'happy');
     } else {
       showMessage('نجمة للتدرّب · لم تُختبر هذه المحاولة.');
     }
@@ -53637,6 +53641,11 @@ function mountVoiceGames({host,say,play,stopSpeech,onAttempt,voiceName,onListeni
       recognizer.interimResults = false;
       recognizer.maxAlternatives = 1;
       if(localRecognition)recognizer.processLocally=true;
+      recognizer.onaudiostart = () => {
+        if (token === operation && phase === 'recording' && mode === 'letters') {
+          showMessage(`أنا أصغي… قل «حرف ال${activeCard().say}».`);
+        }
+      };
       recognizer.onresult = event => {
         const result = event.results[event.resultIndex];
         if (token !== operation || !result?.isFinal || !result[0]) return;
@@ -53672,10 +53681,13 @@ function mountVoiceGames({host,say,play,stopSpeech,onAttempt,voiceName,onListeni
             const display = $('#heard-transcript');
             display.hidden = false;
             display.textContent = `سمعت: «${finalTranscript}»`;
-            const accepted = card.aliases ?? [card.say];
-            if (matchesTarget(finalTranscript, accepted)) completeAttempt('matched');
+            const matched = mode === 'letters'
+              ? matchesLetter(finalTranscript, card)
+              : matchesTarget(finalTranscript, [card.say]);
+            if (matched) completeAttempt('matched');
             else {
-              showMessage(`جرّب مرة تانية. المطلوب «${card.display}».`, 'gentle');
+              const target = mode === 'letters' ? `حرف ال${card.say}` : card.display;
+              showMessage(`جرّب مرة تانية وقل «${target}».`, 'gentle');
               say(GAME_SPEECH.retry, 'calm');
             }
           } else if (maxLevel < .008 && micWasMeasured) {
@@ -53690,7 +53702,9 @@ function mountVoiceGames({host,say,play,stopSpeech,onAttempt,voiceName,onListeni
       };
       recorder.onerror=()=>{if(token!==operation)return;cancelCapture();phase='ready';render();showMessage('تعذّر إكمال التسجيل. جرّب مجددًا أو تدرب دون ميكروفون.','gentle');};
       phase='recording';listeningReported=true;onListening(true);button.disabled=false;button.classList.add('recording');button.querySelector('span').textContent='انتهيت';$('#mic-level').hidden=false;$('#example-play').disabled=true;$('#example-slow').disabled=true;
-      showMessage(testing ? 'أنا أصغي… قل المطلوب مرة واحدة.' : 'عم سجّل محاولتك للتدرّب.');
+      if (!testing) showMessage('عم سجّل محاولتك للتدرّب.');
+      else if (mode === 'letters') showMessage('عم حضّر الميكروفون للاختبار…');
+      else showMessage('أنا أصغي… قل الكلمة مرة واحدة.');
       recorder.start();
       if (testing) beginRecognition(token);
       startMeter(stream,token);
